@@ -64,11 +64,13 @@ public class HomeovnerController {
 		if (homeovner.getLogin() == null || ("").equals(homeovner.getLogin())) {
 			homeovner.setLogin(homeovner.getFirstName() + homeovner.getLastName());
 			int a = r.nextInt(100);
+			System.out.println("CCCCC" + homeovner.getFirstName() + a);
 			homeovner.setPassword(homeovner.getFirstName() + a);
 		}
 		if (result.hasErrors()) {
 			return "homeovnerForm";
 		}
+		
 		homeovnerRepository.save(homeovner);
 		Flat flat = homeovner.getFlats().get(0);
 		flat.setHomeovner(homeovner);

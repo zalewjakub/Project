@@ -72,6 +72,7 @@ public class Homeovner {
 
 	public void setPassword(String password) {
 		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+		System.out.println("aaaaa" + password);
 	}
 
 	public void setId(long id) {

@@ -10,4 +10,5 @@ import project.model.Flat;
 public interface FlatRepository extends JpaRepository<Flat, Long>{
 
 	List<Flat> findByBuilding_Id(long buildingId);
+	List<Flat> findByHomeovner_Id(long userId);
 }

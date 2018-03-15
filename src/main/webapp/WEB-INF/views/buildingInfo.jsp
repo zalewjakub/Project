@@ -13,20 +13,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<h2>${param.message}</h2>
-
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Miasto</th>
-				<th>Ulica</th>
-				<th>Numer</th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
+	
 			<c:forEach items="${buildings}" var="building">
 				<tr>
 					<td>${building.city}</td>
@@ -37,8 +24,7 @@
 					<td><a href="building/more/${building.id}">Więcej</a></td>
 				</tr>
 			</c:forEach>
-			</tbody>
-	</table>
+
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -8,6 +8,7 @@ import project.model.Homeovner;
 
 public interface HomeovnerRepository extends JpaRepository<Homeovner, Long>{
 	Homeovner findOneByLogin(String login);
+	Homeovner findOneById(long id);
 	List<Homeovner> findByLastName(String lastName);
 
 }
