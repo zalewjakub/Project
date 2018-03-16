@@ -12,43 +12,50 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+	<style type='text/css'>
+p {
+	border: 1px solid black;
+}
+</style>
 </head>
 <body>
-	<form:form modelAttribute="homeovner" method="POST" action="/Project/user">
+	<h4>${param.message}</h4>
+	<form:form modelAttribute="homeovner" method="POST"
+		action="/Project/user">
 		<h2>Dane użytkownika</h2>
 		<form:hidden path="id" value="${id}" />
 		<form:hidden path="password" value="${password}" />
 		<form:hidden path="description" value="${description}" />
 		<div class="row">
-			<div class="col-md-2">Imię</div>
+			<div class="col-md-1">Imię</div>
 			<div class="col-md-3">
 				<form:input path="firstName" placeholder="imie" />
 				<form:errors path="firstName"></form:errors>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">Nazwisko</div>
+			<div class="col-md-1">Nazwisko</div>
 			<div class="col-md-3">
 				<form:input path="lastName" placeholder="nazwisko" />
 				<form:errors path="lastName"></form:errors>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">Login</div>
+			<div class="col-md-1">Login</div>
 			<div class="col-md-2">
 				<form:input path="login" placeholder="login" />
 				<form:errors path="login"></form:errors>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">Email</div>
+			<div class="col-md-1">Email</div>
 			<div class="col-md-2">
 				<form:input path="email" placeholder="email" />
 				<form:errors path="email"></form:errors>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">Numer telefonu</div>
+			<div class="col-md-1">Telefon</div>
 			<div class="col-md-2">
 				<form:input path="phone" placeholder="telefon" />
 				<form:errors path="phone"></form:errors>
@@ -56,8 +63,11 @@
 		</div>
 
 		<div class="row">
-			 <a href="/Project/user"><input
-				type="submit" value="Zapisz zmiany" /></a>
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<a href="/Project/user"><input type="submit"
+					value="Zapisz zmiany" /></a>
+			</div>
 		</div>
 		<div class="col-md-8">
 			<table class="table table-striped">
@@ -79,33 +89,26 @@
 			</table>
 		</div>
 	</form:form>
-	<%--  <div class="row">
-			<div class="col-md-2">Ostatnie zgłoszenie</div>
-			<div class="col-md-2">
-				<form:textarea path="text" items="${note}" itemValue="id"
-					itemLabel="text"></form:textarea>
-				<form:errors path="notes"></form:errors>
-			</div>
-		</div> --%>
-	<form:form modelAttribute="notes" action="/Project/user/addNotes"
-		method="post">
-		<div class="row">
-			<div class="col-md-4">
-				<form:textarea path="textInfo" placeholder="Wpisz zgłoszenie"/>
-				<form:errors path="textInfo"></form:errors>
-			</div>
-			<div class="col-md-2">
-				<button type="submit">
-					Dodaj zgłoszenie
-					<button>
-			</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h6>Twoje ostatnie zgłoszenie z dnia</h6>
+			<h5>${note.created}</h5>
 		</div>
-	</form:form>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<p>${note.textInfo}</p>
+		</div>
+	</div>
+	<form action="user/addNotes" method="post">
+		<h5>Dodaj nowe zgłoszenie</h5>
+		<textarea id="textInfo" name="textInfo" placeholder="Wpisz zgłoszenie"></textarea>
+		<a href="user/addNotes"><button type="submit">Dodaj</button></a>
 
+	</form>
+	<br />
 
-
-
-
+	<a href="/Project">Wyloguj użytkownika</a>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -119,6 +122,5 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-	<%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
 </html>

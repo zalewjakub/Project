@@ -14,7 +14,7 @@
 </head>
 <body>
 	<h2>${param.message}</h2>
-<table class="table table-striped">  
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Imię</th>
@@ -30,9 +30,11 @@
 					<td>${homeovner.lastName}</td>
 					<td><a href="homeovner/deleteSure/${homeovner.id}">Usuń</a></td>
 					<td><a href="homeovner/update/${homeovner.id}">Edytuj</a></td>
+					<td><a href="/Project/user/${homeovner.id}">Więcej</a></td>
 				</tr>
-				</tbody>
 			</c:forEach>
+		</tbody>
+
 	</table>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -47,6 +49,6 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-	<%@ include file = "/WEB-INF/views/footer.jsp" %>
+	<%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
 </html>

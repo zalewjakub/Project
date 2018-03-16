@@ -69,10 +69,14 @@ public class Homeovner {
 	public String getPassword() {
 		return password;
 	}
-
+	
+	public void changePassword(String password) {
+	this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+	System.out.println("aaaaa" + password);
+	}
+	
 	public void setPassword(String password) {
-		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-		System.out.println("aaaaa" + password);
+		this.password = password;
 	}
 
 	public void setId(long id) {

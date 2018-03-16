@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.model.Flat;
 import project.model.Homeovner;
@@ -62,10 +63,10 @@ public class HomeovnerController {
 	@PostMapping("/add")
 	public String saveToBase(@Valid Homeovner homeovner, BindingResult result, Model model) {
 		if (homeovner.getLogin() == null || ("").equals(homeovner.getLogin())) {
+	System.out.println("rrrrrrrrrrrrrrrrr");
 			homeovner.setLogin(homeovner.getFirstName() + homeovner.getLastName());
 			int a = r.nextInt(100);
-			System.out.println("CCCCC" + homeovner.getFirstName() + a);
-			homeovner.setPassword(homeovner.getFirstName() + a);
+			homeovner.changePassword(homeovner.getFirstName() + a);
 		}
 		if (result.hasErrors()) {
 			return "homeovnerForm";
@@ -104,5 +105,11 @@ public class HomeovnerController {
 		List<Homeovner> homeovners = homeovnerRepository.findByLastName(lastName);
 		model.addAttribute("homeovners", homeovners);
 		return "homeovners";
+	}
+	
+	@RequestMapping("/count/{id}")
+	@ResponseBody
+	public String count(@PathVariable String id) {
+		return "A tu w niedalekiej przyszlosci rozliczenia czynszu lokatora o id: " + id;
 	}
 }

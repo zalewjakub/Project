@@ -10,8 +10,13 @@
 <body>
 <%@ include file = "/WEB-INF/views/header.jsp" %>
 
-<h1>Najnowsze wieści</h1>
-
+<h2>Najnowsze wieści</h2>
+<h3>Uwaga na koty! Potrafią sie łasić</h3>
+<h4>2018-03-05</h4>
+<h3>Panie sprzątające proszą o nie wyrzucanie petów na trawnik</h3>
+<h4>2018-03-02</h4>
+<h3>Jeże wyraziły ogromny żal z powodu nocnego tupania, które obudziło wielu mieszkańców</h3>
+<h4>2018-02-22</h4>
 <%-- <c:forEach items="${tweets}" var = "tweet">
 	<div border="1px solid darkblue">${tweet}</div>
 </c:forEach> --%>

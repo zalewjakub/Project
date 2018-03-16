@@ -22,6 +22,7 @@
 				<th>Numer mieszkania</th>
 				<th></th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,6 +32,7 @@
 					<td>${flat.number}</td>
 					<td><a href="flat/deleteSure/${flat.id}">Usuń</a></td>
 					<td><a href="flat/update/${flat.id}">Edytuj</a></td>
+					<td><a href="flat/more/${flat.id}">Więcej</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

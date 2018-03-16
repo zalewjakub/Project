@@ -15,11 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import project.model.Admin;
 import project.model.Flat;
 import project.model.Homeovner;
 import project.model.Notes;
@@ -46,22 +49,30 @@ public class UserController {
 		return notesRepository.findById(id);
 	}
 
-	// @ModelAttribute("building")
-	// public Building building() {
-	// return buildingRepository.findOne(buildingId);
-	// }
 
 	@ModelAttribute("flats")
 	public List<Flat> flats() {
 		return flatRepository.findByHomeovner_Id(this.id);
 	}
 
+	@GetMapping("/{id}")
+	public String user(@PathVariable String id, Model model) {
+		System.out.println("aAAAAA" + id);
+		Homeovner homeovner = homeovnerRepository.findOneById(Long.parseLong(id));
+		model.addAttribute("homeovner", homeovner);
+		List<Flat> flat = flatRepository.findByHomeovner_Id(Long.parseLong(id));
+		model.addAttribute("flat", flat);
+		List<Notes> notes = notesRepository.findAllByHomeovner_Id(Long.parseLong(id));
+		model.addAttribute("notes", notes);
+		return "homeovner";
+	}
+	
 	@RequestMapping("")
 	public String homepage(Model model) {
 		Homeovner homeovner = homeovnerRepository.findOneById(this.id);
 		model.addAttribute("homeovner", homeovner);
-		// Notes note = notesRepository.findOneByHomeovner_Id(this.id);
-		// model.addAttribute("note", note);
+		Notes note = notesRepository.findUsingCreationTime(this.id);
+		model.addAttribute("note", note);
 		Notes notes = new Notes();
 		model.addAttribute("notes", notes);
 		return "userData";
@@ -73,24 +84,20 @@ public class UserController {
 		}
 		homeovnerRepository.save(homeovner);
 		model.addAttribute("homeovner", homeovner);
-		// Notes note = notesRepository.findOneByHomeovner_Id(this.id);
-		// model.addAttribute("note", note);
+		Notes note = notesRepository.findOneByHomeovner_Id(this.id);
+		model.addAttribute("note", note);
 		Notes notes = new Notes();
 		model.addAttribute("notes", notes);
 		return "userData";
 	}
 	
 	
-	
 	@PostMapping("/addNotes")
-	public String addNotes(@Valid Notes notes, BindingResult result, Model model) {
-		System.out.println("AAAAA");
-
-		if (result.hasErrors()) {
-			return "notesAdd";
-		}
-		System.out.println("bbbb" + notes.getTextInfo());
-		notesRepository.save(notes);
+	public String addNotes(@RequestParam String textInfo, Model model) {
+		Notes note = new Notes();
+		note.setTextInfo(textInfo);
+		note.setHomeovner(homeovnerRepository.findOneById(id));
+		notesRepository.save(note);
 		return "redirect:/user";
 	}
 
@@ -119,22 +126,14 @@ public class UserController {
 		return "redirect:/user/loginUser?message=" + message;
 	}
 
-	//
-	// @GetMapping("/adminSearch/{value}")
-	// public String getSearch(@PathVariable String value, Model model) {
-	// System.out.println("aaaaaaa" + value);
-	// if (("Building").equals(value)) {
-	// model.addAttribute("building", new Building());
-	// return "buildingSearch";
-	// } else if (("Homeowner").equals(value)) {
-	// model.addAttribute("homeovner", new Homeovner());
-	// System.out.println("aaaaaaa");
-	// return "homeovnerSearch";
-	// } else if (("Flat").equals(value)) {
-	// model.addAttribute("flat", new Flat());
-	// return "flatSearch";
-	// }
-	// return "admin";
-	// }
+	@RequestMapping("/add")
+	@ResponseBody
+	public String add() {
+		Notes note = new Notes();
+		note.setTextInfo("To nowa wiadomosc");
+		note.setHomeovner(homeovnerRepository.findOneById(id));
+		notesRepository.save(note);
+		return "Id dodanego admina to:" + note.getId();
+	}
 
 }

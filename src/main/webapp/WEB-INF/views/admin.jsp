@@ -37,6 +37,6 @@
 		<option value="adminSearch/Flat">Mieszkania</option>
 		<option value="building">Budynku</option>
 	</select> 
-	
+	<a href="/Project">Do strony głównej</a>
 </body>
 </html>
